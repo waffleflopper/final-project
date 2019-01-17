@@ -2,9 +2,10 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import FaceRecognition from '../faceRecognition/FaceRecognition';
 
 import './ImageLinkForm.css';
 
@@ -19,19 +20,14 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
+    },
+    divider: {
+        marginTop: 10,
+        marginBottom: 10,
     }
 })
 
 class ImageLinkForm extends React.Component {
-    state = {
-        url: 'https://some_url'
-    }
-
-    handleChange = name => event => {
-        this.setState ({
-            [name]: event.target.value,
-        })
-    }
 
     render() {
         const { classes } = this.props;
@@ -45,17 +41,23 @@ class ImageLinkForm extends React.Component {
                 id="url"
                 label="URL"
                 className={classes.textField}
-                value={this.state.name}
-                onChange={this.handleChange('url')}
+                onChange={this.props.onInputChange}
                 margin="normal"
                 fullWidth
                 helperText="http://link.to.someimage.jpg"
             />
-            <Button className={classes.button} color="primary">Submit!</Button>
+            <Button 
+            className={classes.button} 
+            color="primary" 
+            onClick={this.props.onButtonSubmit}>
+                Submit!
+            </Button>
+
+
+
+            <FaceRecognition imgURL={this.props.imgURL}/>
         </Paper>
     )
-    
-    
     }
 
 }
