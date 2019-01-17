@@ -1,0 +1,5 @@
+.paperWrapper {
+    display: flex;
+    width: 50%;
+    align-self: center;
+}
