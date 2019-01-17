@@ -14,10 +14,10 @@ const Rank = (props) => {
     const { classes } = props;
     return (
         <div className={classes.root}>
-            <Typography variant="h4" color="inherit">
+            <Typography variant="h4">
                 Robert, your curret rank is...
             </Typography>
-            <Typography variant="h3" color="inherit">
+            <Typography variant="h3" color="secondary">
                 #5
             </Typography>
         </div>

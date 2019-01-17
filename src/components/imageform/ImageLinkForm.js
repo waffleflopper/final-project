@@ -47,8 +47,9 @@ class ImageLinkForm extends React.Component {
                 helperText="http://link.to.someimage.jpg"
             />
             <Button 
+            variant="contained"
             className={classes.button} 
-            color="primary" 
+            color="secondary" 
             onClick={this.props.onButtonSubmit}>
                 Submit!
             </Button>

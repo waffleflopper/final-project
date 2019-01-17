@@ -4,6 +4,9 @@ import Navigation from './components/navigation/Navigation';
 import ImageLinkForm from './components/imageform/ImageLinkForm';
 import Rank from './components/rank/Rank';
 
+import {purple, pink, grey}from '@material-ui/core/colors';
+import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
+
 import Clarifai from 'clarifai';
 
 import './App.css';
@@ -12,13 +15,45 @@ const app = new Clarifai.App({
   apiKey: '098385f82e6c430fafc059b485a02d00',
 })
 
+// THEME INFORMATION
+const darkTheme = createMuiTheme({
+  palette: {
+      primary: {
+        main: grey[800],
+      },
+      secondary: {
+          main: pink[700],
+      },
+      type: 'dark',
+  }
+});
+
+const lightTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: pink[800],
+      },
+      secondary: {
+          main: pink[700],
+      },
+      type: 'light',
+  }
+});
+
+//REACT APP STARTS HERE
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       input: '',
       imgURL: '',
+      lightTheme: false,
     }
+  }
+
+  onThemeChange = () => {
+    this.setState({lightTheme: !this.state.lightTheme})
   }
 
   onInputChange = (evt) => {
@@ -42,8 +77,12 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={this.state.lightTheme ? lightTheme : darkTheme}>
+      <CssBaseline />
+      {/*LEAVE ABOVE LINE ALONE */}
+
       <div className="App">
-        <Navigation />
+        <Navigation themeClicker={this.onThemeChange} lightTheme={this.state.lightTheme}/>
         <div className="container">
           <Rank />
           <ImageLinkForm 
@@ -52,8 +91,10 @@ class App extends Component {
             imgURL={this.state.imgURL}
           />
         </div>
-        
       </div>
+
+      {/*LEAVE BELOW ALONE*/}
+      </MuiThemeProvider>
     );
   }
 }
