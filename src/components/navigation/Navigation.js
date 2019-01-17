@@ -32,8 +32,8 @@ const Navigation = (props) => {
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                         RB
                     </IconButton>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
-                        Facial Recognition
+                    <Typography variant="h4" color="inherit" className={classes.grow}>
+                        Facial Recognition - Final Project
                     </Typography>
                     <Button color="inherit">Logout</Button>
                 </Toolbar>
