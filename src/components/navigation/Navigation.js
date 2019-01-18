@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.css';
-import {FormControlLabel, Switch, IconButton, Button, Typography, Toolbar, AppBar, withStyles} from '@material-ui/core';
+import {FormControlLabel, Switch, Button, Typography, Toolbar, AppBar, withStyles} from '@material-ui/core';
 
 const styles = theme => ({
     menuButton: {

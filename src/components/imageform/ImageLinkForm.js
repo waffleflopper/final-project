@@ -1,11 +1,7 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import FaceRecognition from '../faceRecognition/FaceRecognition';
+
+import {Button, TextField, withStyles, Typography, Paper} from '@material-ui/core';
 
 import './ImageLinkForm.css';
 
