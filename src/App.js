@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navigation from './components/navigation/Navigation';
 import ImageLinkForm from './components/imageform/ImageLinkForm';
 import Rank from './components/rank/Rank';
+import Signin from './components/signin/Signin';
 
 import {pink, grey}from '@material-ui/core/colors';
 import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
@@ -99,6 +100,7 @@ class App extends Component {
       <div className="App">
         <Navigation themeClicker={this.onThemeChange} lightTheme={this.state.lightTheme}/>
         <div className="container">
+          <Signin />
           <Rank />
           <ImageLinkForm 
             onInputChange={this.onInputChange} 
