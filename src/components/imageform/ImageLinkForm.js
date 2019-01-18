@@ -52,7 +52,7 @@ class ImageLinkForm extends React.Component {
 
 
 
-            <FaceRecognition imgURL={this.props.imgURL}/>
+            <FaceRecognition imgURL={this.props.imgURL} box={this.props.box}/>
         </Paper>
     )
     }

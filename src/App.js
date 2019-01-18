@@ -75,6 +75,7 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
+    console.log(box);
     this.setState({box: box});
   }
 
@@ -83,7 +84,7 @@ class App extends Component {
     app.models.predict(
       "a403429f2ddf4b49b307e318f00e528b", 
       this.state.input)
-      .then(response => this.calculateFaceLocation(response))
+      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
       .catch(err => console.log(err));
   }
 
@@ -103,6 +104,7 @@ class App extends Component {
             onInputChange={this.onInputChange} 
             onButtonSubmit={this.onButtonSubmit}
             imgURL={this.state.imgURL}
+            box={this.state.box}
           />
         </div>
       </div>
