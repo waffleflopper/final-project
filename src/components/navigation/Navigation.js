@@ -16,7 +16,7 @@ const styles = theme => ({
 })
 
 const Navigation = (props) => {
-    const { classes, themeClicker, lightTheme, onRouteChange } = props;
+    const { classes, themeClicker, lightTheme, onRouteChange, isSignedIn } = props;
 
     return (
 
@@ -37,11 +37,21 @@ const Navigation = (props) => {
                         Facial Recognition - Final Project
                     </Typography>
                     
-                    {props.route==='home' 
-                    ? 
-                    <Button onClick={() => onRouteChange('signin')}color="inherit">Logout</Button> 
-                    : 
-                    <Button onClick={() => onRouteChange('register')}color="inherit">I'm a Button</Button>}
+                    {!isSignedIn ?
+                    <Button 
+                        onClick={() => onRouteChange('signin')}
+                        color="inherit"
+                    >
+                        Signin
+                    </Button> 
+                    :
+                    <Button 
+                        onClick={() => onRouteChange('signout')}
+                        color="inherit"
+                    >
+                        Signout
+                    </Button>}
+
                 </Toolbar>
             </AppBar>
         </div>

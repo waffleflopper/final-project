@@ -53,6 +53,7 @@ class App extends Component {
       lightTheme: false,
       box: {},
       route: 'signin',
+      isSignedIn: false,
     }
   }
 
@@ -92,7 +93,13 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    this.setState({route: route})
+    if (route === 'signout') {
+      this.setState({isSignedIn: false});
+      route = 'signin';
+    }
+
+    if (route === 'home') this.setState({isSignedIn: true});
+    this.setState({route: route});
   }
 
   showContent = () => {
@@ -102,7 +109,7 @@ class App extends Component {
       case 'register':
         return <Register onRouteChange={this.onRouteChange}/>;
       case 'home':
-        return <div class="nothing-wrapper">
+        return <div className="nothing-wrapper">
                   <Rank />
                   <ImageLinkForm 
                     onInputChange={this.onInputChange} 
@@ -128,6 +135,7 @@ class App extends Component {
           themeClicker={this.onThemeChange} 
           lightTheme={this.state.lightTheme}
           onRouteChange={this.onRouteChange}
+          isSignedIn={this.state.isSignedIn}
         />
         <div className="container">
           {this.showContent()}
