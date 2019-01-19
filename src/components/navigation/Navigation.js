@@ -58,14 +58,6 @@ const Navigation = (props) => {
 
     );
 
-
-
-    /* const { classes } = props;
-    return(
-        <nav>
-            <Button variant="contained" className={classes.button} color="secondary">Sign Out</Button>
-        </nav>
-    ); */
 }
 
 export default withStyles(styles)(Navigation);
