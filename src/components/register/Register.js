@@ -15,16 +15,17 @@ const styles = theme => ({
     loginTitle: {
         padding: '12px',
     },
-    loginButton: {
+    regButton: {
         marginLeft: 'auto',
     }
 })
-class Signin extends React.Component {
+class Register extends React.Component {
     constructor() {
         super()
         this.state = {
             password: '',
             username: '',
+            email: '',
             showPassword: false,
         }
     }
@@ -43,9 +44,19 @@ class Signin extends React.Component {
           <div className={classes.root}>
             <Card>
                 <CardHeader 
-                    title="Login"
+                    title="Registration"
                 />
                 <CardContent>
+                <FormControl fullWidth className={classes.margin}>
+                        <InputLabel htmlFor="email">Email Address</InputLabel>
+                        <Input  
+                            id="email"
+                            type="email"
+                            autoComplete="email"
+                            value={this.state.email}
+                            onChange={this.handleChange("email")}
+                        />
+                </FormControl>
                     <FormControl fullWidth className={classes.margin}>
                         <InputLabel htmlFor="username">Username</InputLabel>
                         <Input  
@@ -77,19 +88,19 @@ class Signin extends React.Component {
                     </FormControl>
                 </CardContent>
                 <CardActions className={classes.margin}>
-                    <Button onClick={() => this.props.onRouteChange('register')} size="small">Signup</Button>
+                    <Button onClick={()=>this.props.onRouteChange('signin')} size="small">Login</Button>
                     <Button 
-                        className={classes.loginButton} 
+                        className={classes.regButton} 
                         variant="contained" 
                         color="secondary" 
                         size="small"
                         onClick={() => this.props.onRouteChange('home')}
-                    >Login</Button>
+                    >Signup!</Button>
                 </CardActions>
             </Card>
           </div>
         );
     }
 }
-export default withStyles(styles)(Signin)
+export default withStyles(styles)(Register)
 

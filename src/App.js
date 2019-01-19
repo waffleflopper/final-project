@@ -4,6 +4,7 @@ import Navigation from './components/navigation/Navigation';
 import ImageLinkForm from './components/imageform/ImageLinkForm';
 import Rank from './components/rank/Rank';
 import Signin from './components/signin/Signin';
+import Register from './components/register/Register';
 
 import {pink, grey}from '@material-ui/core/colors';
 import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
@@ -51,6 +52,7 @@ class App extends Component {
       imgURL: '',
       lightTheme: false,
       box: {},
+      route: 'signin',
     }
   }
 
@@ -89,7 +91,30 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  onRouteChange = (route) => {
+    this.setState({route: route})
+  }
 
+  showContent = () => {
+    switch(this.state.route) {
+      case 'signin':
+        return <Signin onRouteChange={this.onRouteChange}/>;
+      case 'register':
+        return <Register onRouteChange={this.onRouteChange}/>;
+      case 'home':
+        return <div class="nothing-wrapper">
+                  <Rank />
+                  <ImageLinkForm 
+                    onInputChange={this.onInputChange} 
+                    onButtonSubmit={this.onButtonSubmit}
+                    imgURL={this.state.imgURL}
+                    box={this.state.box}
+                  />
+                </div>;
+      default:
+        return null;
+    }
+  }
 
   render() {
     return (
@@ -98,16 +123,14 @@ class App extends Component {
       {/*LEAVE ABOVE LINE ALONE */}
 
       <div className="App">
-        <Navigation themeClicker={this.onThemeChange} lightTheme={this.state.lightTheme}/>
+        <Navigation 
+          route={this.state.route} 
+          themeClicker={this.onThemeChange} 
+          lightTheme={this.state.lightTheme}
+          onRouteChange={this.onRouteChange}
+        />
         <div className="container">
-          <Signin />
-          <Rank />
-          <ImageLinkForm 
-            onInputChange={this.onInputChange} 
-            onButtonSubmit={this.onButtonSubmit}
-            imgURL={this.state.imgURL}
-            box={this.state.box}
-          />
+          {this.showContent()}
         </div>
       </div>
 
