@@ -20,8 +20,8 @@ const styles = theme => ({
     }
 })
 class Signin extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             password: '',
             username: '',
@@ -36,7 +36,23 @@ class Signin extends React.Component {
     toggleShowPassword = () => {
         this.setState(state => ({showPassword: !state.showPassword}));
     } 
+
+    onSubmitSignIn = () => {
+        fetch('http://localhost:3000/signin', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.state.username,
+                password: this.state.password,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data === 'success') this.props.onRouteChange('home');
+        })
         
+    }
+
     render() {  
         const { classes } = this.props;
         return (
@@ -83,7 +99,7 @@ class Signin extends React.Component {
                         variant="contained" 
                         color="secondary" 
                         size="small"
-                        onClick={() => this.props.onRouteChange('home')}
+                        onClick={this.onSubmitSignIn}
                     >Login</Button>
                 </CardActions>
             </Card>
