@@ -13,6 +13,8 @@ import Clarifai from 'clarifai';
 
 import './App.css';
 
+import API_URL from './serverInfo';
+
 const app = new Clarifai.App({
   apiKey: '098385f82e6c430fafc059b485a02d00',
 })
@@ -95,7 +97,22 @@ class App extends Component {
     app.models.predict(
       "a403429f2ddf4b49b307e318f00e528b", 
       this.state.input)
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        this.displayFaceBox(this.calculateFaceLocation(response))
+        if (response) {
+          fetch(`${API_URL}/image`, {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            }),
+          })
+          .then(response => response.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, {entries: count}))
+          });
+        } //end if
+      }) //end predict.then
       .catch(err => console.log(err));
   }
 

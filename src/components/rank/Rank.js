@@ -15,7 +15,7 @@ const Rank = (props) => {
     return (
         <div className={classes.root}>
             <Typography variant="h4">
-                {`${name}, your curret rank is...`}
+                {`${name}, your curret entry count is...`}
             </Typography>
             <Typography variant="h3" color="secondary">
                 {entries}
