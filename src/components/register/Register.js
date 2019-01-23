@@ -2,6 +2,8 @@ import React from 'react';
 import { withStyles, Card, CardContent, InputAdornment, InputLabel, CardActions, Button, FormControl, Input, IconButton, CardHeader } from '@material-ui/core';
 import { Visibility, VisibilityOff} from '@material-ui/icons';
 
+import API_URL from '../../serverInfo';
+
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -24,7 +26,7 @@ class Register extends React.Component {
         super()
         this.state = {
             password: '',
-            username: '',
+            name: '',
             email: '',
             showPassword: false,
         }
@@ -37,6 +39,26 @@ class Register extends React.Component {
     toggleShowPassword = () => {
         this.setState(state => ({showPassword: !state.showPassword}));
     } 
+
+    onSubmitSignIn = () => {
+        fetch(`${API_URL}/register`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password,
+                name: this.state.name,
+            })
+        })
+        .then(response => response.json())
+        .then(user => {
+            if (user) {
+                this.props.loadUser(user);
+                this.props.onRouteChange('home');
+            }
+        })
+        
+    }
         
     render() {  
         const { classes } = this.props;
@@ -58,12 +80,12 @@ class Register extends React.Component {
                         />
                 </FormControl>
                     <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="username">Username</InputLabel>
+                        <InputLabel htmlFor="name">Name</InputLabel>
                         <Input  
-                            id="username"
+                            id="name"
                             type="text"
-                            value={this.state.username}
-                            onChange={this.handleChange("username")}
+                            value={this.state.name}
+                            onChange={this.handleChange("name")}
                             
                         />
                     </FormControl>
@@ -94,7 +116,7 @@ class Register extends React.Component {
                         variant="contained" 
                         color="secondary" 
                         size="small"
-                        onClick={() => this.props.onRouteChange('home')}
+                        onClick={this.onSubmitSignIn}
                     >Signup!</Button>
                 </CardActions>
             </Card>

@@ -54,6 +54,13 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: '',
+      },
     }
   }
 
@@ -102,15 +109,25 @@ class App extends Component {
     this.setState({route: route});
   }
 
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined,
+    }});
+  }
+
   showContent = () => {
     switch(this.state.route) {
       case 'signin':
-        return <Signin onRouteChange={this.onRouteChange}/>;
+        return <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>;
       case 'register':
-        return <Register onRouteChange={this.onRouteChange}/>;
+        return <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>;
       case 'home':
         return <div className="nothing-wrapper">
-                  <Rank />
+                  <Rank name={this.state.user.name} entries={this.state.user.entries} />
                   <ImageLinkForm 
                     onInputChange={this.onInputChange} 
                     onButtonSubmit={this.onButtonSubmit}

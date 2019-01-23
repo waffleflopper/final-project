@@ -11,14 +11,14 @@ const styles = theme => ({
 })
 
 const Rank = (props) => {
-    const { classes } = props;
+    const { classes, name, entries } = props;
     return (
         <div className={classes.root}>
             <Typography variant="h4">
-                Robert, your curret rank is...
+                {`${name}, your curret rank is...`}
             </Typography>
             <Typography variant="h3" color="secondary">
-                #5
+                {entries}
             </Typography>
         </div>
     );

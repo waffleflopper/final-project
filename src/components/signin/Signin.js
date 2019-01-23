@@ -2,6 +2,8 @@ import React from 'react';
 import { withStyles, Card, CardContent, InputAdornment, InputLabel, CardActions, Button, FormControl, Input, IconButton, CardHeader } from '@material-ui/core';
 import { Visibility, VisibilityOff} from '@material-ui/icons';
 
+import API_URL from '../../serverInfo';
+
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -38,7 +40,7 @@ class Signin extends React.Component {
     } 
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3000/signin', {
+        fetch(`${API_URL}/signin`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -47,8 +49,11 @@ class Signin extends React.Component {
             })
         })
         .then(response => response.json())
-        .then(data => {
-            if (data === 'success') this.props.onRouteChange('home');
+        .then(user => {
+            if (user.id) {
+                this.props.loadUser(user);
+                this.props.onRouteChange('home');
+            }
         })
         
     }
